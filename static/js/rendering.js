@@ -5,6 +5,7 @@
  * Time: 14:24
  * To change this template use File | Settings | File Templates.
  */
+ //TODO: change display & data rendering using more sexy JS lib
 function renderbw()
 {
     //black & white rendering for table
