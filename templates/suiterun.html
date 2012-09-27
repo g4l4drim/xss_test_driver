@@ -1,5 +1,6 @@
 <html>
 <head>
+<!--looks like its the WRONG code  -->
     <title>Suite running</title>
     <script>
         var timer = 0;
@@ -41,9 +42,7 @@
                 }
                 if("suite executed"!=iframesrc){
                     status("Test timeout, reloading Iframe");
-                    //Reset du temps pour le nouveau tests
                     resetTime();
-                    //Refresh iframe
                     Reload();
                 }
                 else{
@@ -57,7 +56,6 @@
             var f = document.getElementById('test_iframe');
             f.src = "{% url xdb.views.next_test  %}";
         }
-        //Si on lance un nouveau test on appelle cette fonction
         function resetTime(){
             timer = 0;
             status("Test Launched");
@@ -68,8 +66,6 @@
 </head>
 <body>
     All test cases are currently executed in the iframe below :<br/>
-    <!-- Sur le onload on a une fonction qui remet le temps à 0. Comme la fonction est appelé
-    au moment ou l'iframe à finit de charger on commence un nouveau test-->
     <iframe id="test_iframe" src="{% url xdb.views.next_test  %}" onload="resetTime();" sandbox="allow-scripts allow-same-origin"></iframe><br/>
     Test Status :<div id="test_status">Test Launched</div><br/>
     Current test uri:<div id="suite_status">/test/next</div>
@@ -80,11 +76,6 @@
     {% url xdb.views.next_test %} if the test is stuck or failed... <br/>
     depending on the webcontext and suite size<br/>
     you'll have to refresh alot ;) be warned !!!<br/>
-    <!--
-    #TODO: Suite progression ;)
-    #TODO: Add running Iframe function to paralellise more
-    #TODO: Add a running test Tab or a running browser via URL (clustering ?)
-    -->
 
 </body>
 </html>
