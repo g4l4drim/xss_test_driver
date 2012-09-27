@@ -16,5 +16,14 @@
 
 =========================================================================
 
-Good luck ;)
+TODO: write a real readme !
 
+=========================================================================
+Founded by : http://dali.kereval.com/
+
+Thanks :
+Kereval for fundings
+Alain Ribault for freeing the code
+Yves Le Traon and Sylvain Gombault for support
+@garethheyes for http://shazzer.co.uk/home and all shazzer contributors
+Mario for http://html5sec.org/ (so much cool xss vectors)
