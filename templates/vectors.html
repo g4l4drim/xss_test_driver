@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>XSS Vectors List</title>
+</head>
+<body>
+<H3>XSS Vectors Availables for Test</H3>
+{% if vector_list %}
+    <table>
+    <tr><th>N</th><th>Desc</th><th>Vector</th></tr>
+    {% for v in vector_list %}
+        <tr>
+            <td><a href="/xss/{{ v.id }}/">{{ v.id }}</a></td>
+            <td><textarea cols=45 rows=4 >{{ v.desc|escape }}</textarea></td>
+            <td><textarea cols=45 rows=4 >{{ v.vector|escape }}</textarea></td></td>
+        </tr>
+    {% endfor %}
+{% endif %}
+</table>
+</body>
+</html>

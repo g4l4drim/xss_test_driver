@@ -1,0 +1,18 @@
+table, th, td{
+    border:  1px solid gray;
+}
+table{
+    table-layout: fixed
+}
+table{
+    border-collapse:collapse;
+}
+td{
+    text-align:center;
+}
+td.pass{
+    background-color:black;
+    color:white;
+}
+
+.hover { border-color: #66cc00; }

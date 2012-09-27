@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Available Test Suites</title>
+
+</head>
+<body>
+<H3>XSS Vectors Test Suites</H3>
+{% if suites %}
+    <table>
+    <tr><th>Name</th><th>Desc</th><th>Execute</th></tr>
+    {% for s in suites %}
+        <tr>
+            <td><a href="/suite/{{ s.id }}/">{{ s.name|escape }}</a></td>
+            <td><textarea cols=45 rows=4 >{{ s.desc|escape }}</textarea></td>
+            <td><a href="/suite/{{ s.id }}/run">Run</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Add browser</title>
+</head>
+<body>
+{% if form %}
+Please add a short description of your browser and details on its properties
+(ex: Firefox 4.0 windows or Android 2.1 default browser, or IE6 (2001))
+<form action="/browser/add" method="post">
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+{% endif %}
+{% if browser_list %}
+    <H1>Registered browsers</H1>
+    <a href="/browser/add">Add your browser</a>
+    <table>
+    <tr><th>Id</th><th>Name</th><th>User Agent</th></tr>
+    {% for b in browser_list %}
+        <tr>
+            <td><a href="/browser/{{ b.id }}/">{{ b.id }}</a></td>
+            <td><textarea cols=45 rows=4 >{{ b.name|escape }}</textarea></td>
+            <td><textarea cols=45 rows=4 >{{ b.ua|escape }}</textarea></td></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if browser %}
+    <h1>{{ browser.desc|escape}}</h1><br/>
+    <textarea cols=45 rows=4 >{{ browser.ua|escape }}</textarea><br/>
+    {% if browser.valid_ua %}
+        Browser use his original User Agent String
+    {% else %}
+        Browser User Agent String may not be legitimate
+    {% endif %}<br/>
+    Browser description :<br/>
+    <textarea cols=45 rows=4 >{{ browser.desc|escape }}</textarea><br/>
+    Date of build :{{ browser.build_date }}<br/>
+    Tested the :{{ browser.test_date }}<br/>
+    By : {{ browser.contributor|escape }}<br/>
+    Browser origin : {{ browser.source|escape }} <br/>
+    Installed plugins (as provided by tester, if any):<br/>
+    <li>
+    {% for plugin in browser.plugins.all %}
+        <ul>{{ plugin|escape }}</ul>
+    {% endfor %}
+    </li><br/>
+    Executed vectors for each context :
+    {% if vectors %}
+        <table>
+        <tr><th>N</th><th>Desc</th><th>Vector</th>Context-Encoding</tr>
+        {% for v in vectors %}
+            <tr>
+                <td><a href="/xss/{{ v.id }}/">{{ v.id }}</a></td>
+                <td><textarea cols=45 rows=4 >{{ v.desc|escape }}</textarea></td>
+                <td><textarea cols=45 rows=4 >{{ v.vector|escape }}</textarea></td></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% endif %}
+</body>
+</html>

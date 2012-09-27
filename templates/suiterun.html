@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Suite running</title>
+    <script>
+        var timer = 0;
+        var wait=500
+        var tm=setTimeout("time()", wait);
+        var ct=setTimeout("checkTime()", wait+1);
+        function status(status_text){
+            document.getElementById("test_status").innerHTML=status_text;
+        }
+        function currtest(){
+            testuri="?"
+            try{
+                testuri=document.getElementById('test_iframe').contentWindow.location.href
+            }
+            catch(err){
+                testuri="?"
+            }
+            document.getElementById("suite_status").innerHTML=testuri;
+        }
+        //Gestion du timer
+        function time(){
+            tm=setTimeout("time()", wait);
+            var remaining=0;
+            timer += 1;
+            remaining=4-timer;
+            status("Test timeout in :"+remaining+". ");
+        }
+
+        //Si un test dure plus de 5s alors on refresh l'iframe (on considère qu'il à planté)
+        function checkTime(){
+            var iframesrc="";
+            currtest()
+            ct=setTimeout("checkTime()", wait);
+            if(timer > 3)
+            {
+                try{iframesrc=document.getElementById('test_iframe').contentWindow.document.body.innerHTML}
+                catch(err){
+                    iframesrc=""
+                }
+                if("suite executed"!=iframesrc){
+                    status("Test timeout, reloading Iframe");
+                    //Reset du temps pour le nouveau tests
+                    resetTime();
+                    //Refresh iframe
+                    Reload();
+                }
+                else{
+                    status("suite executed, thank you !");
+                    clearTimeout(ct);
+                    clearTimeout(tm);
+                }
+            }
+        }
+        function Reload () {
+            var f = document.getElementById('test_iframe');
+            f.src = "{% url xdb.views.next_test  %}";
+        }
+        //Si on lance un nouveau test on appelle cette fonction
+        function resetTime(){
+            timer = 0;
+            status("Test Launched");
+            currtest();
+
+        }
+    </script>
+</head>
+<body>
+    All test cases are currently executed in the iframe below :<br/>
+    <!-- Sur le onload on a une fonction qui remet le temps à 0. Comme la fonction est appelé
+    au moment ou l'iframe à finit de charger on commence un nouveau test-->
+    <iframe id="test_iframe" src="{% url xdb.views.next_test  %}" onload="resetTime();" sandbox="allow-scripts allow-same-origin"></iframe><br/>
+    Test Status :<div id="test_status">Test Launched</div><br/>
+    Current test uri:<div id="suite_status">/test/next</div>
+    <input type="button" value="Reload" onclick="Reload();"><br/>
+
+    
+    <a href={% url xdb.views.next_test %}>Launch test manually</a> (you'll have to refresh/go to
+    {% url xdb.views.next_test %} if the test is stuck or failed... <br/>
+    depending on the webcontext and suite size<br/>
+    you'll have to refresh alot ;) be warned !!!<br/>
+    <!--
+    #TODO: Suite progression ;)
+    #TODO: Add running Iframe function to paralellise more
+    #TODO: Add a running test Tab or a running browser via URL (clustering ?)
+    -->
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<H1>Suite Details</H1>
+{% if suite %}
+    <h2>{{ suite.name|escape }}</h2>
+    <p>{{ suite.desc|escape }}</p>
+    <H2>Vectors :</H2>
+    <table>
+    <tr><th>N</th><th>Desc</th><th>Vector</th></tr>
+    {% for v in vectors %}
+        <tr>
+            <td><a href="/xss/{{ v.id }}/">{{ v.id }}</a></td>
+            <td><textarea cols=45 rows=4 >{{ v.desc|escape }}</textarea></td>
+            <td><textarea cols=45 rows=4 >{{ v.vector|escape }}</textarea></td></td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% if results %}
+        {% for r in results %}
+            {{ r|yesno }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+</body>
+</html>

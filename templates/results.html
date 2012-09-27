@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Result display</title>
+    {% endif %}
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/rendering.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/table.css">
+</head>
+<body>
+    {% if title %}
+    <h1>{{ title }}</h1>
+    {% else %}
+    <h1>Result display</h1>
+    {% endif %}
+    {% if desc %}
+    <p>{{ desc }}</p>
+    {% else %}
+    <p>Generig Test Result Display :<br/>
+    1 => vector interpreted and javascript executed from browser<br/>
+    0 => vector failing to execute or no test result
+    <br/>
+    </p>
+    {% endif %}
+
+{% load xdb_extra %}
+    <table>
+        <tr>
+            <th><pre>      Browser/Vector      </pre></th>{% for v in vectors %}<th><a href="/xss/{{ v.id }}/"><b>{{ v.id }}</b></a></th>{% endfor %}
+        </tr>
+            {% for b in browsers %}<tr><td><a href="/browser/{{ b.id }}/"><b>{{ b.name }}</b></a></td>{% for v in vectors %}<td>{{ b|vector_result:v }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

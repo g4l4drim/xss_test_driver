@@ -1,0 +1,11 @@
+{% extends "admin/base_site.html" %}
+{% block title %}Shazzer Import{% endblock %}
+{% block content %}
+    {% if form %}
+    Shazzer Export URL to import from :
+    <form action="/admin/shazzerimport/" method="post">
+    {{ form }}
+    <input type="submit" value="Submit" />
+    </form>
+    {% endif %}
+{% endblock %}
