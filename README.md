@@ -16,6 +16,13 @@
 
 =========================================================================
 
+Install :
+python ./manage.py syncdb
+
+python ./manage.py runserver
+
+
+TODO: generic db with vectors & examples ?
 TODO: write a real readme !
 
 =========================================================================
