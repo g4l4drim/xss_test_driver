@@ -17,7 +17,7 @@
 
 """
 
-from xssdb.xdb.models import *
+from xdb.models import *
 from django.contrib import admin
 
 admin.site.register(Vector)
