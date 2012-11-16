@@ -1,5 +1,4 @@
   XSS Test Driver : cross browser XSS Vector Testing Tool
-    Copyright (C) 2012  Erwan ABGRALL
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
