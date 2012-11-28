@@ -39,3 +39,5 @@ Yves Le Traon and Sylvain Gombault for support
 
 Mario for http://html5sec.org/ (so much cool xss vectors)
 
+Related paper : http://arxiv.org/pdf/1211.4812.pdf
+
