@@ -124,7 +124,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'xssdb.urls'
+ROOT_URLCONF = 'xss_test_driver.urls'
 
 TEMPLATE_DIRS = (os.path.join(PROJECT_DIR,'templates'),)
 
