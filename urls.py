@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'xssdb.views.home', name='home'),
     # url(r'^xssdb/', include('xssdb.foo.urls')),
-    url(r'^admin/shazzerimport/$', 'xssdb.xdb.admin_views.shazzer_import'),
+    url(r'^admin/shazzerimport/$', 'xss_test_driver.xdb.admin_views.shazzer_import'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     #website index :
